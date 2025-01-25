@@ -1,5 +1,6 @@
 package com.example.todo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : ComponentActivity() {
-    private lateinit var recyclerView: RecyclerView  // Declare RecyclerView with lateinit
+    private lateinit var recyclerView: RecyclerView
     private val icons: MutableList<Icon> = mutableListOf(
         Icon("Camera", R.drawable.ic_camera),
         Icon("Checkbox", R.drawable.ic_checkbox),
@@ -41,14 +42,15 @@ class MainActivity : ComponentActivity() {
 
         iconAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
-                // Handle item click
-                Toast.makeText(this@MainActivity, "Icon clicked: ${icons[position].name}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@MainActivity, ItemDetail::class.java)
+                intent.putExtra("name", icons[position].name) // Correct method is putExtra
+                startActivity(intent)
+                // Uncomment the line below if you want to show a Toast message
+                // Toast.makeText(this@MainActivity, "Icon clicked: ${icons[position].name}", Toast.LENGTH_SHORT).show()
             }
         })
 
-        // Set the adapter for the RecyclerView
+
         recyclerView.adapter = iconAdapter
-
-
     }
 }
