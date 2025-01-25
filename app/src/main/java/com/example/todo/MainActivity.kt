@@ -2,46 +2,44 @@ package com.example.todo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.todo.ui.theme.TodoTheme
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : ComponentActivity() {
+    private lateinit var recyclerView: RecyclerView  // Declare RecyclerView with lateinit
+    private val icons: MutableList<Icon> = mutableListOf(
+        Icon("Camera", R.drawable.ic_camera),
+        Icon("Checkbox", R.drawable.ic_checkbox),
+        Icon("Date", R.drawable.ic_date),
+        Icon("Edit", R.drawable.ic_edit),
+        Icon("Image", R.drawable.ic_image),
+        Icon("List", R.drawable.ic_list),
+        Icon("Rating", R.drawable.ic_rating),
+        Icon("Text", R.drawable.ic_text),
+        Icon("Time", R.drawable.ic_time),
+        Icon("Toggle", R.drawable.ic_toggle)
+    )
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            TodoTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
-    }
-}
+        setContentView(R.layout.activity_main)
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hi, my name is $name!",
-        modifier = modifier
-    )
-}
+        recyclerView = findViewById(R.id.recView)
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TodoTheme {
-        Greeting("Android")
+        val linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        val dividerItemDecoration = DividerItemDecoration(this, linearLayoutManager.orientation)
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
+        recyclerView.layoutManager = linearLayoutManager
+
+        val iconAdapter = IconAdapter(icons)
+
+        // Set the adapter for the RecyclerView
+        recyclerView.adapter = iconAdapter
+
+
     }
 }
