@@ -1,3 +1,3 @@
 package com.example.todo
 
-class Fruit(private val name: String, private val image: Int)
+class Fruit(val name: String, val image: Int)

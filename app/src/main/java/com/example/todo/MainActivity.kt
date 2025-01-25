@@ -8,7 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : ComponentActivity() {
     private lateinit var recyclerView: RecyclerView  // Declare RecyclerView with lateinit
-    private val fruits: MutableList<Fruit> = mutableListOf(Fruit("Apple", R.drawable.ic_camera), Fruit("Banana", R.drawable.ic_image))
+    private val fruits: MutableList<Fruit> = mutableListOf(
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image),
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image),
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image),
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image),
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image),
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image),
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image),
+        Fruit("Apple", R.drawable.ic_camera),
+        Fruit("Banana", R.drawable.ic_image)
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +40,11 @@ class MainActivity : ComponentActivity() {
         recyclerView.addItemDecoration(dividerItemDecoration)
 
         recyclerView.layoutManager = linearLayoutManager
+
+        val fruitAdapter = FruitAdapter(fruits)
+
+        // Set the adapter for the RecyclerView
+        recyclerView.adapter = fruitAdapter
 
 
     }
