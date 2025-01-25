@@ -1,6 +1,8 @@
 package com.example.todo
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +38,13 @@ class MainActivity : ComponentActivity() {
         recyclerView.layoutManager = linearLayoutManager
 
         val iconAdapter = IconAdapter(icons)
+
+        iconAdapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                // Handle item click
+                Toast.makeText(this@MainActivity, "Icon clicked: ${icons[position].name}", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         // Set the adapter for the RecyclerView
         recyclerView.adapter = iconAdapter

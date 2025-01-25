@@ -11,6 +11,13 @@ class IconAdapter(private val iconList: List<Icon>) : RecyclerView.Adapter<IconA
 
     private val icons: MutableList<Icon> = iconList.toMutableList()
 
+
+    private lateinit var onItemClickListener: OnItemClickListener
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // Inflate the item layout
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
@@ -21,6 +28,9 @@ class IconAdapter(private val iconList: List<Icon>) : RecyclerView.Adapter<IconA
         // Bind data to the ViewHolder
         val icon = iconList[position]
         holder.bind(icon)
+        holder.itemView.setOnClickListener {
+            onItemClickListener.onItemClick(holder.itemView, position)
+        }
     }
 
     override fun getItemCount(): Int {
