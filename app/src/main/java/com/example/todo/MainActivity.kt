@@ -8,23 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : ComponentActivity() {
     private lateinit var recyclerView: RecyclerView  // Declare RecyclerView with lateinit
-    private val fruits: MutableList<Fruit> = mutableListOf(
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image),
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image),
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image),
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image),
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image),
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image),
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image),
-        Fruit("Apple", R.drawable.ic_camera),
-        Fruit("Banana", R.drawable.ic_image)
+    private val icons: MutableList<Icon> = mutableListOf(
+        Icon("Camera", R.drawable.ic_camera),
+        Icon("Checkbox", R.drawable.ic_checkbox),
+        Icon("Date", R.drawable.ic_date),
+        Icon("Edit", R.drawable.ic_edit),
+        Icon("Image", R.drawable.ic_image),
+        Icon("List", R.drawable.ic_list),
+        Icon("Rating", R.drawable.ic_rating),
+        Icon("Text", R.drawable.ic_text),
+        Icon("Time", R.drawable.ic_time),
+        Icon("Toggle", R.drawable.ic_toggle)
     )
 
 
@@ -41,10 +35,10 @@ class MainActivity : ComponentActivity() {
 
         recyclerView.layoutManager = linearLayoutManager
 
-        val fruitAdapter = FruitAdapter(fruits)
+        val iconAdapter = IconAdapter(icons)
 
         // Set the adapter for the RecyclerView
-        recyclerView.adapter = fruitAdapter
+        recyclerView.adapter = iconAdapter
 
 
     }

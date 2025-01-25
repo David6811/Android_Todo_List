@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FruitAdapter(private val fruitList: List<Fruit>) : RecyclerView.Adapter<FruitAdapter.ViewHolder>() {
+class IconAdapter(private val iconList: List<Icon>) : RecyclerView.Adapter<IconAdapter.ViewHolder>() {
 
-    private val fruits: MutableList<Fruit> = fruitList.toMutableList()
+    private val icons: MutableList<Icon> = iconList.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // Inflate the item layout
@@ -19,13 +19,13 @@ class FruitAdapter(private val fruitList: List<Fruit>) : RecyclerView.Adapter<Fr
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to the ViewHolder
-        val fruit = fruitList[position]
-        holder.bind(fruit)
+        val icon = iconList[position]
+        holder.bind(icon)
     }
 
     override fun getItemCount(): Int {
         // Return the size of the list
-        return fruitList.size
+        return iconList.size
     }
 
     // ViewHolder class
@@ -37,11 +37,10 @@ class FruitAdapter(private val fruitList: List<Fruit>) : RecyclerView.Adapter<Fr
 
 
 
-        fun bind(fruit: Fruit) {
+        fun bind(icon: Icon) {
             // Bind the data to your views here
-            // Example: textView.text = fruit.name
-            textView.text = fruit.name
-            imageView.setImageResource(fruit.image)
+            textView.text = icon.name
+            imageView.setImageResource(icon.image)
         }
     }
 }
