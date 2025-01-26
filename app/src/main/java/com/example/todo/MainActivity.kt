@@ -9,29 +9,28 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.activities.CreateItem
+import com.example.todo.dao.AppDatabase
+import com.example.todo.entities.Icons
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : ComponentActivity() {
+    private lateinit var db: AppDatabase
+
     private lateinit var recyclerView: RecyclerView
-    private lateinit var fbt: FloatingActionButton
-    private val icons: MutableList<Icon> = mutableListOf(
-        Icon("Camera", R.drawable.ic_camera),
-        Icon("Checkbox", R.drawable.ic_checkbox),
-        Icon("Date", R.drawable.ic_date),
-        Icon("Edit", R.drawable.ic_edit),
-        Icon("Image", R.drawable.ic_image),
-        Icon("List", R.drawable.ic_list),
-        Icon("Rating", R.drawable.ic_rating),
-        Icon("Text", R.drawable.ic_text),
-        Icon("Time", R.drawable.ic_time),
-        Icon("Toggle", R.drawable.ic_toggle)
-    )
+
+
+    private val icons: MutableList<Icons> = mutableListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize the database
+        db = AppDatabase.getInstance(applicationContext)
+
+        icons.clear()
+        icons.addAll(db.iconsDao().getAll())
 
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         floatingActionButton.setOnClickListener {
