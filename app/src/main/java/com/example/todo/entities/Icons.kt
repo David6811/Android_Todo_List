@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "icons")
 data class Icons(
-    @PrimaryKey @ColumnInfo(name = "rowid") val id: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "rowid") val id: Int = 0,
     val name: String?,
     val image: Int?
 )
