@@ -8,9 +8,11 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : ComponentActivity() {
     private lateinit var recyclerView: RecyclerView
+    private lateinit var fbt: FloatingActionButton
     private val icons: MutableList<Icon> = mutableListOf(
         Icon("Camera", R.drawable.ic_camera),
         Icon("Checkbox", R.drawable.ic_checkbox),
@@ -29,7 +31,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        val floatingActionButton = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+        floatingActionButton.setOnClickListener {
+            // Handle click event here
+        }
+
         recyclerView = findViewById(R.id.recView)
+
 
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -52,5 +61,7 @@ class MainActivity : ComponentActivity() {
 
 
         recyclerView.adapter = iconAdapter
+
+
     }
 }
