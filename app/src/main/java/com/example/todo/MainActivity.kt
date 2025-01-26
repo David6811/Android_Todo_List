@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.activities.CreateItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +35,8 @@ class MainActivity : ComponentActivity() {
 
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         floatingActionButton.setOnClickListener {
-            // Handle click event here
+            val intent = Intent(this@MainActivity, CreateItem::class.java)
+            startActivity(intent)
         }
 
         recyclerView = findViewById(R.id.recView)
