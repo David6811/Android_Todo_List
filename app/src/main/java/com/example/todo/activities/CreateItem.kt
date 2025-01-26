@@ -1,17 +1,16 @@
 package com.example.todo.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import com.example.todo.MainActivity
 import com.example.todo.R
 import com.example.todo.dao.AppDatabase
 import com.example.todo.entities.Icons
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class CreateItem : AppCompatActivity() {
     private lateinit var db: AppDatabase
@@ -29,7 +28,7 @@ class CreateItem : AppCompatActivity() {
         val nameEditText = findViewById<TextView>(R.id.create_text_item_name)
         createButton.setOnClickListener {
             val iconName = nameEditText.text.toString()
-            val iconImage = R.drawable.ic_image // Replace with actual drawable resource ID
+            val iconImage = R.drawable.ic_text // Replace with actual drawable resource ID
 
             if (iconName.isNotEmpty()) {
                 // Create a new Icon object
@@ -40,6 +39,8 @@ class CreateItem : AppCompatActivity() {
                 nameEditText.text = ""
                 Toast.makeText(this@CreateItem, "Create Successfully", Toast.LENGTH_SHORT)
                     .show()
+                val intent = Intent(this@CreateItem, MainActivity::class.java)
+                startActivity(intent)
             } else {
                 // Show an error message if inputs are invalid
                 Toast.makeText(

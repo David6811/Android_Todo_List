@@ -6,11 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.entities.Icons
 
-class IconAdapter(private val iconList: List<Icon>) : RecyclerView.Adapter<IconAdapter.ViewHolder>() {
-
-    private val icons: MutableList<Icon> = iconList.toMutableList()
-
+class IconAdapter(private val iconList: List<Icons>) :
+    RecyclerView.Adapter<IconAdapter.ViewHolder>() {
 
     private lateinit var onItemClickListener: OnItemClickListener
 
@@ -34,23 +33,18 @@ class IconAdapter(private val iconList: List<Icon>) : RecyclerView.Adapter<IconA
     }
 
     override fun getItemCount(): Int {
-        // Return the size of the list
         return iconList.size
     }
 
     // ViewHolder class
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Initialize your views here (e.g., TextView, ImageView)
-        // Example: private val textView: TextView = itemView.findViewById(R.id.textView)
         private val textView: TextView = itemView.findViewById(R.id.textView)
         private val imageView: ImageView = itemView.findViewById(R.id.imageView)
 
-
-
-        fun bind(icon: Icon) {
+        fun bind(icon: Icons) {
             // Bind the data to your views here
             textView.text = icon.name
-            imageView.setImageResource(icon.image)
+            icon.image?.let { imageView.setImageResource(it) }
         }
     }
 }
