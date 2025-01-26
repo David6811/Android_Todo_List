@@ -21,6 +21,12 @@
           </targets>
         </DialogSelection>
       </SelectionState>
+      <SelectionState runConfigName="insertAndGetAllIcons()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="IconDaoTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
