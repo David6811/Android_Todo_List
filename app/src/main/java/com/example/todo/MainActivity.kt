@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
         iconAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 val intent = Intent(this@MainActivity, ItemDetail::class.java)
+                intent.putExtra("id", icons[position].id)
                 intent.putExtra("name", icons[position].name) // Correct method is putExtra
                 startActivity(intent)
                 // Uncomment the line below if you want to show a Toast message

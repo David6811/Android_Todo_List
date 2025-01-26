@@ -34,7 +34,7 @@ class CreateItem : AppCompatActivity() {
                 // Create a new Icon object
                 val newIcon = Icons(name = iconName, image = iconImage)
                 val list = db.iconsDao().getAll()
-                //db.iconsDao().deleteAll()
+                // db.iconsDao().deleteAll()
                 db.iconsDao().insertAll(arrayOf(newIcon))
                 nameEditText.text = ""
                 Toast.makeText(this@CreateItem, "Create Successfully", Toast.LENGTH_SHORT)

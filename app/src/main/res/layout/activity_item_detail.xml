@@ -22,5 +22,5 @@
         android:id="@+id/submit_item_name"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="@string/submit" />
+        android:text="Delete" />
 </LinearLayout>

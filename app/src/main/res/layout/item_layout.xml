@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_weight="5"
-        android:textSize="18sp"
+        android:textSize="24dp"
         android:gravity="center_vertical"
         android:layout_margin="5dp"
         android:text="TextView" />

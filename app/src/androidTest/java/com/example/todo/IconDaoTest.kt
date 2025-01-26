@@ -83,4 +83,26 @@ class IconDaoTest {
         val icons = iconDao.getAll()
         assertTrue(icons.isEmpty())
     }
+
+    @Test
+    fun deleteItemById() {
+        // Create a list of Icons to insert
+        val icon1 = Icons(id = 1, name = "Icon1", image = 101)
+        val icon2 = Icons(id = 2, name = "Icon2", image = 102)
+
+        // Insert icons
+        iconDao.insertAll(arrayOf(icon1, icon2))
+
+        // Delete the icon with id = 1
+        iconDao.deleteItemById(1)
+
+        // Get all icons from the database
+        val icons = iconDao.getAll()
+
+        // Assert that only the icon with id = 2 remains
+        assertNotNull(icons)
+        assertEquals(1, icons.size)
+        assertFalse(icons.any { it.id == 1 })
+        assertTrue(icons.any { it.id == 2 })
+    }
 }

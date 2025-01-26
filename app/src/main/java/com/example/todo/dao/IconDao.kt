@@ -19,4 +19,7 @@ interface IconDao {
 
     @Query("DELETE FROM icons")
     fun deleteAll()
+
+    @Query("DELETE FROM icons WHERE rowid = :iconId")
+    fun deleteItemById(iconId: Int)
 }
