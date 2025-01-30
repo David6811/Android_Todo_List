@@ -7,7 +7,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.todo.dao.AppDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ItemDetail : AppCompatActivity() {
     private lateinit var db: AppDatabase
@@ -33,10 +36,14 @@ class ItemDetail : AppCompatActivity() {
             // Show a Toast message with the retrieved id
             if (id != 0) {
                 //Toast.makeText(this, "ID: $id", Toast.LENGTH_SHORT).show()
-                db.iconsDao().deleteItemById(id)
-                val intent = Intent(this@ItemDetail, MainActivity::class.java)
-                startActivity(intent)
-
+                lifecycleScope.launch(Dispatchers.IO) {
+                    db.iconsDao().deleteItemById(id)
+                    launch(Dispatchers.Main) {
+                        val intent = Intent(this@ItemDetail, MainActivity::class.java)
+                        startActivity(intent)
+                        finish() // Close current activity
+                    }
+                }
             } else {
                 Toast.makeText(this, "ID not available", Toast.LENGTH_SHORT).show()
             }

@@ -9,17 +9,17 @@ import com.example.todo.entities.Icons
 @Dao
 interface IconDao {
     @Insert
-    fun insertAll(users: Array<Icons>)
+    suspend fun insertAll(users: Array<Icons>)
 
     @Delete
     fun delete(icons: Icons)
 
     @Query("SELECT * FROM icons")
-    fun getAll(): List<Icons>
+    suspend fun getAll(): List<Icons>
 
     @Query("DELETE FROM icons")
-    fun deleteAll()
+    suspend fun deleteAll()
 
     @Query("DELETE FROM icons WHERE rowid = :iconId")
-    fun deleteItemById(iconId: Int)
+    suspend fun deleteItemById(iconId: Int)
 }

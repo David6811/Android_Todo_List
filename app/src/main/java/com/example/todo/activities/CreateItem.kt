@@ -7,10 +7,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.todo.MainActivity
 import com.example.todo.R
 import com.example.todo.dao.AppDatabase
 import com.example.todo.entities.Icons
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CreateItem : AppCompatActivity() {
     private lateinit var db: AppDatabase
@@ -31,16 +34,22 @@ class CreateItem : AppCompatActivity() {
             val iconImage = R.drawable.ic_text // Replace with actual drawable resource ID
 
             if (iconName.isNotEmpty()) {
-                // Create a new Icon object
                 val newIcon = Icons(name = iconName, image = iconImage)
-                val list = db.iconsDao().getAll()
-                // db.iconsDao().deleteAll()
-                db.iconsDao().insertAll(arrayOf(newIcon))
-                nameEditText.text = ""
-                Toast.makeText(this@CreateItem, "Create Successfully", Toast.LENGTH_SHORT)
-                    .show()
-                val intent = Intent(this@CreateItem, MainActivity::class.java)
-                startActivity(intent)
+
+                lifecycleScope.launch(Dispatchers.IO) {
+                    db.iconsDao().insertAll(arrayOf(newIcon)) // Runs in background
+
+                    // Switch to the main thread for UI updates
+                    launch(Dispatchers.Main) {
+                        nameEditText.text = ""
+                        Toast.makeText(this@CreateItem, "Create Successfully", Toast.LENGTH_SHORT).show()
+
+                        // Navigate to MainActivity
+                        val intent = Intent(this@CreateItem, MainActivity::class.java)
+                        startActivity(intent)
+                        finish() // Close current activity
+                    }
+                }
             } else {
                 // Show an error message if inputs are invalid
                 Toast.makeText(
