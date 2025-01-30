@@ -33,7 +33,7 @@ class ItemDetail : AppCompatActivity() {
             // Show a Toast message with the retrieved id
             if (id != 0) {
                 //Toast.makeText(this, "ID: $id", Toast.LENGTH_SHORT).show()
-                db.iconsDao().deleteItemById(id)
+                // db.iconsDao().deleteItemById(id)
                 val intent = Intent(this@ItemDetail, MainActivity::class.java)
                 startActivity(intent)
 

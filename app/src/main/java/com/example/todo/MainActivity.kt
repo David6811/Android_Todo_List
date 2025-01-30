@@ -1,5 +1,6 @@
 package com.example.todo
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,9 @@ import com.example.todo.activities.CreateItem
 import com.example.todo.dao.AppDatabase
 import com.example.todo.entities.Icons
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private lateinit var db: AppDatabase
@@ -22,6 +26,7 @@ class MainActivity : ComponentActivity() {
     private val icons: MutableList<Icons> = mutableListOf()
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,8 +34,16 @@ class MainActivity : ComponentActivity() {
         // Initialize the database
         db = AppDatabase.getInstance(applicationContext)
 
-        icons.clear()
-        icons.addAll(db.iconsDao().getAll())
+        CoroutineScope(Dispatchers.IO).launch {
+            val iconList = db.iconsDao().getAll()
+
+            // Update the UI on the main thread
+            runOnUiThread {
+                icons.clear()
+                icons.addAll(iconList)
+                recyclerView.adapter?.notifyDataSetChanged()  // Refresh UI
+            }
+        }
 
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         floatingActionButton.setOnClickListener {
